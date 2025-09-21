@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pequeño Regalo</title>
+    <title>Sunflower Garden with Shooting Stars</title>
     <style>
 *,
 *::after,
@@ -136,6 +136,11 @@ body {
     justify-content: center;
     transition: filter 0.5s ease-out;
 }
+
+#main-content.blur {
+    filter: blur(10px);
+}
+
 
 #mute-button {
     position: fixed;
@@ -419,41 +424,92 @@ body {
     }
 }
 
-/* --- Slideshow --- */
-#slideshow-container {
+/* --- Photo Gallery --- */
+#gallery-button {
     position: fixed;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 75vw;
-    max-width: 380px;
-    aspect-ratio: 4 / 3;
-    z-index: 15;
-    perspective: 1000px;
-    pointer-events: none;
+    bottom: 20px;
+    left: 20px;
+    z-index: 998;
+    background: none;
+    border: none;
+    font-size: 50px;
+    cursor: pointer;
+    color: #ff4d4d;
+    animation: pulse 2s infinite;
+    transition: transform 0.3s;
+}
+#gallery-button:hover{
+    transform: scale(1.1);
 }
 
-.slide {
-    position: absolute;
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        text-shadow: 0 0 10px #ff4d4d;
+    }
+    50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 20px #ff4d4d;
+    }
+}
+
+#gallery-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    opacity: 0;
-    transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
-    transform: translateX(100px) rotateY(-20deg) scale(0.9);
+    background: rgba(0,0,0,0.7);
+    z-index: 1001;
+    display: none; /* Changed to none */
+    opacity: 0; /* Initially transparent */
+    transition: opacity 0.5s ease-out;
+    justify-content: center;
+    align-items: center;
 }
 
-.slide.visible {
-    opacity: 1;
-    transform: translateX(0) rotateY(0) scale(1);
-}
-
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+#gallery-container {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 15px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 255, 250, 0.3);
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.5s ease-out;
+}
+
+.photos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.photos-grid img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+#gallery-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 35px;
+    text-align: center;
 }
 
 
@@ -498,11 +554,9 @@ body {
   <!-- Pantalla de Login -->
   <div id="login-container">
     <form id="login-form">
-        <h2>
-            Un pequeño regalo
-        </h2>
+        <h2>Un Jardín Especial</h2>
         <div class="input-group">
-            <label for="password">Palabra Secreta: tu año de nacimiento</label>
+            <label for="password">Palabra Secreta:</label>
             <input type="password" id="password" required>
         </div>
         <button type="submit">Entrar</button>
@@ -510,6 +564,21 @@ body {
     </form>
   </div>
   
+  <!-- Galería de fotos (oculta inicialmente) -->
+    <div id="gallery-overlay">
+        <div id="gallery-container">
+            <button id="gallery-close-button">&times;</button>
+            <div class="photos-grid">
+                <!-- CAMBIA ESTAS URLS POR LAS TUYAS -->
+                <img src="https://placehold.co/600x400/FFC300/000000?text=Tu+Foto+1" alt="Recuerdo 1">
+                <img src="https://placehold.co/400x600/FF5733/FFFFFF?text=Tu+Foto+2" alt="Recuerdo 2">
+                <img src="https://placehold.co/600x400/C70039/FFFFFF?text=Tu+Foto+3" alt="Recuerdo 3">
+                <!-- Puedes añadir más etiquetas <img> aquí -->
+            </div>
+        </div>
+    </div>
+
+
   <!-- Contenido Principal (oculto inicialmente) -->
   <main id="main-content">
       <audio id="background-music" loop>
@@ -517,49 +586,7 @@ body {
         Tu navegador no soporta el elemento de audio.
       </audio>
       <button id="mute-button">🎵</button>
-      
-      <div id="slideshow-container">
-        <div class="slide">
-            <img src="img/img1.jpg" alt="Recuerdo 1">
-        </div>
-        <div class="slide">
-            <img src="img/img2.jpg" alt="Recuerdo 2">
-        </div>
-        <div class="slide">
-            <img src="img/img3.jpg" alt="Recuerdo 3">
-        </div>
-        <div class="slide">
-            <img src="img/img4.jpg" alt="Recuerdo 4">
-        </div>
-        <div class="slide">
-            <img src="img/img5.jpg" alt="Recuerdo 5">
-        </div>
-        <div class="slide">
-            <img src="img/img6.jpg" alt="Recuerdo 6">
-        </div>
-        <div class="slide">
-            <img src="img/img7.jpg" alt="Recuerdo 7">
-        </div>
-        <div class="slide">
-            <img src="img/img8.jpg" alt="Recuerdo 8">
-        </div>
-        <div class="slide">
-            <img src="img/img9.jpg" alt="Recuerdo 9">
-        </div>
-        <div class="slide">
-            <img src="img/img10.jpg" alt="Recuerdo 10">
-        </div>
-        <div class="slide">
-            <img src="img/img11.jpg" alt="Recuerdo 11">
-        </div>
-        <div class="slide">
-            <img src="img/img12.jpg" alt="Recuerdo 12">
-        </div>
-        <div class="slide">
-            <img src="img/img13.jpg" alt="Recuerdo 13">
-        </div>
-      </div>
-      
+      <button id="gallery-button">❤️</button>
       <div class="night"></div>
       <div id="animated-message" class="message-container"></div>
       <div class="fireflies-container"></div>
@@ -883,6 +910,12 @@ body {
         const loginForm = document.getElementById('login-form');
         const passwordInput = document.getElementById('password');
         const errorMessage = document.getElementById('error-message');
+        
+        const galleryOverlay = document.getElementById('gallery-overlay');
+        const galleryContainer = document.getElementById('gallery-container');
+        const galleryButton = document.getElementById('gallery-button');
+        const galleryCloseButton = document.getElementById('gallery-close-button');
+
 
         // --- CONFIGURACIÓN ---
         const CORRECT_PASSWORD = '1998';
@@ -910,6 +943,32 @@ body {
             }
         });
 
+        // --- Gallery Logic ---
+        galleryButton.addEventListener('click', () => {
+            mainContent.classList.add('blur');
+            galleryOverlay.style.display = 'flex';
+            setTimeout(()=> {
+                galleryOverlay.style.opacity = '1';
+                galleryContainer.style.transform = 'scale(1)';
+            }, 50);
+        });
+
+        galleryCloseButton.addEventListener('click', () => {
+            mainContent.classList.remove('blur');
+            galleryOverlay.style.opacity = '0';
+            galleryContainer.style.transform = 'scale(0.9)';
+            setTimeout(()=> {
+                galleryOverlay.style.display = 'none';
+            }, 500);
+        });
+        
+        galleryOverlay.addEventListener('click', (e) => {
+             if (e.target === galleryOverlay) {
+                galleryCloseButton.click();
+            }
+        });
+
+
         function startMainContent() {
             const music = document.getElementById('background-music');
             const muteButton = document.getElementById('mute-button');
@@ -927,8 +986,7 @@ body {
             });
             
             const messageContainer = document.getElementById('animated-message');
-            //const message = "Eres la luz que ilumina mis días más oscuros."; 
-            const message ="Feliz dia de la juventud y primavera este es un pequeño regalo para vos aprobechar para decirte que sos la mejor mama del mundo y que sos nuestro pilar gracias por todo mi amor espero que te guste tu regalo te amamos muchisimo de parte de Mateo, Danna y yo  <3"
+            const message = "Eres la luz que ilumina mis días más oscuros."; 
             message.split('').forEach((char, index) => {
                 const span = document.createElement('span');
                 if(char === ' '){
@@ -961,20 +1019,6 @@ body {
 
                 firefliesContainer.appendChild(firefly);
             }
-            
-            // Lógica del slideshow
-            const slides = document.querySelectorAll('#slideshow-container .slide');
-            let currentSlide = 0;
-
-            if (slides.length > 0) {
-                slides[currentSlide].classList.add('visible');
-
-                setInterval(() => {
-                    slides[currentSlide].classList.remove('visible');
-                    currentSlide = (currentSlide + 1) % slides.length;
-                    slides[currentSlide].classList.add('visible');
-                }, 5000); // Cambia de foto cada 5 segundos
-            }
 
 
             const c = setTimeout(() => {
@@ -1006,6 +1050,4 @@ body {
   </script>
 </body>
 </html>
-
-
 
