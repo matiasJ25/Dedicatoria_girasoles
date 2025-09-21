@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunflower Garden with Shooting Stars</title>
+    <title>Pequeño Regalo</title>
     <style>
 *,
 *::after,
@@ -498,9 +498,11 @@ body {
   <!-- Pantalla de Login -->
   <div id="login-container">
     <form id="login-form">
-        <h2>Un Jardín Especial</h2>
+        <h2>
+            Un pequeño regalo
+        </h2>
         <div class="input-group">
-            <label for="password">Palabra Secreta:</label>
+            <label for="password">Palabra Secreta: tu año de nacimiento</label>
             <input type="password" id="password" required>
         </div>
         <button type="submit">Entrar</button>
@@ -517,21 +519,44 @@ body {
       <button id="mute-button">🎵</button>
       
       <div id="slideshow-container">
-        <!-- CAMBIA ESTAS URLS POR LAS TUYAS -->
         <div class="slide">
-            <img src="https://placehold.co/600x450/FFC300/000000?text=Foto+1" alt="Recuerdo 1">
+            <img src="img/img1.jpg" alt="Recuerdo 1">
         </div>
         <div class="slide">
-            <img src="https://placehold.co/600x450/FF5733/FFFFFF?text=Foto+2" alt="Recuerdo 2">
+            <img src="img/img2.jpg" alt="Recuerdo 2">
         </div>
         <div class="slide">
-            <img src="https://placehold.co/600x450/C70039/FFFFFF?text=Foto+3" alt="Recuerdo 3">
+            <img src="img/img3.jpg" alt="Recuerdo 3">
         </div>
         <div class="slide">
-            <img src="https://placehold.co/600x450/900C3F/FFFFFF?text=Foto+4" alt="Recuerdo 4">
+            <img src="img/img4.jpg" alt="Recuerdo 4">
         </div>
         <div class="slide">
-            <img src="https://placehold.co/600x450/581845/FFFFFF?text=Foto+5" alt="Recuerdo 5">
+            <img src="img/img5.jpg" alt="Recuerdo 5">
+        </div>
+        <div class="slide">
+            <img src="img/img6.jpg" alt="Recuerdo 6">
+        </div>
+        <div class="slide">
+            <img src="img/img7.jpg" alt="Recuerdo 7">
+        </div>
+        <div class="slide">
+            <img src="img/img8.jpg" alt="Recuerdo 8">
+        </div>
+        <div class="slide">
+            <img src="img/img9.jpg" alt="Recuerdo 9">
+        </div>
+        <div class="slide">
+            <img src="img/img10.jpg" alt="Recuerdo 10">
+        </div>
+        <div class="slide">
+            <img src="img/img11.jpg" alt="Recuerdo 11">
+        </div>
+        <div class="slide">
+            <img src="img/img12.jpg" alt="Recuerdo 12">
+        </div>
+        <div class="slide">
+            <img src="img/img13.jpg" alt="Recuerdo 13">
         </div>
       </div>
       
@@ -860,7 +885,7 @@ body {
         const errorMessage = document.getElementById('error-message');
 
         // --- CONFIGURACIÓN ---
-        const CORRECT_PASSWORD = 'TeAmo';
+        const CORRECT_PASSWORD = '1998';
         // ---------------------
 
         loginForm.addEventListener('submit', (e) => {
@@ -902,7 +927,8 @@ body {
             });
             
             const messageContainer = document.getElementById('animated-message');
-            const message = "Eres la luz que ilumina mis días más oscuros."; 
+            //const message = "Eres la luz que ilumina mis días más oscuros."; 
+            const message ="Feliz dia de la juventud y primavera este es un pequeño regalo para vos aprobechar para decirte que sos la mejor mama del mundo y que sos nuestro pilar gracias por todo mi amor espero que te guste tu regalo te amamos muchisimo de parte de Mateo, Danna y yo  <3"
             message.split('').forEach((char, index) => {
                 const span = document.createElement('span');
                 if(char === ' '){
